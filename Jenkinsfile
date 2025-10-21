@@ -1,24 +1,25 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush()
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+
         stage('Build') {
             steps {
                 sh 'sudo docker-compose build'
             }
         }
+
         stage('Restart App') {
             steps {
-                sh 'sudo docker-compose up -d'
+                sh '''
+                    sudo docker-compose down || true
+                    sudo docker-compose up -d
+                '''
             }
         }
     }
@@ -29,4 +30,3 @@ pipeline {
         }
     }
 }
-
