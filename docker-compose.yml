@@ -1,0 +1,22 @@
+# docker-compose.yml
+
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "0.0.0.0:5173:5173"
+    restart: unless-stopped
+    environment:
+      - VITE_WEBSOCKET_URL=${WEBSOCKET_URL:-ws://192.168.1.17:8181}
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "0.0.0.0:8181:8181"
+    restart: unless-stopped
