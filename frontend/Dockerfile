@@ -20,6 +20,6 @@ RUN npm run build
 EXPOSE 5173
 
 # Serve the app
-CMD ["serve", "-s", "dist", "-l", "0.0.0.0:5173"]
+CMD ["serve", "-s", "dist", "-l", "5173"]
 
 
